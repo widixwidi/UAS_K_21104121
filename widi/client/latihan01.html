@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Javascript Client server</title>
+</head>
+<body>
+
+    <div id="infodata"></div>
+    
+    <script>
+        const xmlhttp = new XMLHttpRequest()
+        
+        setInterval(function(){
+            xmlhttp.open("GET","http://localhost/widi/server/latihan1.php")
+            xmlhttp.send()
+        }, 1000);
+        
+
+        xmlhttp.onload = function(){
+            const mydta = JSON.parse(this.responseText)
+            console.log(mydta)
+
+            let tx  = "Daftar Buah-buahan:<ul>"
+                for(i=0;i<mydta.length;i++){
+                    tx += "<li>"+mydta[i]+"</li>"
+                }
+                tx += "</ul>"
+
+            document.getElementById("infodata").innerHTML = tx
+        }
+    </script>
+</body>
+</html>
